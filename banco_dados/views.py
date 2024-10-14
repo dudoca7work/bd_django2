@@ -18,6 +18,10 @@ from .models import BolsistaAtivo
 from .forms import BolsistaAtivoForm
 from .models import Frequencia
 from .forms import FrequenciaForm
+from .models import Registros
+from .forms import RegistrosForm
+from .models import ConsultaPag
+from .forms import ConsultaPagForm
 
 # View para listar usuários
 def usuario_list(request):
@@ -427,3 +431,100 @@ def frequencia_delete(request, pk):
         frequencia.delete()
         return redirect('frequencia_list')
     return render(request, 'frequencia/frequencia_confirm_delete.html', {'frequencia': frequencia})
+
+
+
+
+
+
+
+# View para listar registros
+def registro_list(request):
+    registros = Registros.objects.all()  # Busca todos os registros
+    return render(request, 'registros/registro_list.html', {'registros': registros})
+
+# View para detalhes de um registro
+def registro_detail(request, pk):
+    registro = get_object_or_404(Registros, pk=pk)  # Busca um registro específico
+    return render(request, 'registros/registro_detail.html', {'registro': registro})
+
+# View para criar um novo registro
+def registro_create(request):
+    if request.method == 'POST':
+        form = RegistrosForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o novo registro
+            return redirect('registro_list')  # Redireciona para a lista de registros
+    else:
+        form = RegistrosForm()  # Cria um novo formulário
+    return render(request, 'registros/registro_form.html', {'form': form})
+
+# View para editar um registro existente
+def registro_update(request, pk):
+    registro = get_object_or_404(Registros, pk=pk)  # Busca o registro para edição
+    if request.method == 'POST':
+        form = RegistrosForm(request.POST, instance=registro)
+        if form.is_valid():
+            form.save()  # Salva as alterações
+            return redirect('registro_detail', pk=pk)  # Redireciona para os detalhes do registro
+    else:
+        form = RegistrosForm(instance=registro)  # Carrega o formulário com os dados existentes
+    return render(request, 'registros/registro_form.html', {'form': form})
+
+# View para deletar um registro
+def registro_delete(request, pk):
+    registro = get_object_or_404(Registros, pk=pk)  # Busca o registro para deletar
+    if request.method == 'POST':
+        registro.delete()  # Deleta o registro
+        return redirect('registro_list')  # Redireciona para a lista de registros
+    return render(request, 'registros/registro_confirm_delete.html', {'registro': registro})
+
+
+
+
+
+
+
+
+
+
+# View para listar consultas de pagamento
+def consulta_pag_list(request):
+    consultas = ConsultaPag.objects.all()  # Busca todas as consultas de pagamento
+    return render(request, 'consultas_pag/consulta_pag_list.html', {'consultas': consultas})
+
+# View para detalhes de uma consulta de pagamento
+def consulta_pag_detail(request, pk):
+    consulta = get_object_or_404(ConsultaPag, pk=pk)  # Busca uma consulta específica
+    return render(request, 'consultas_pag/consulta_pag_detail.html', {'consulta': consulta})
+
+# View para criar uma nova consulta de pagamento
+def consulta_pag_create(request):
+    if request.method == 'POST':
+        form = ConsultaPagForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva a nova consulta
+            return redirect('consulta_pag_list')  # Redireciona para a lista de consultas
+    else:
+        form = ConsultaPagForm()  # Cria um novo formulário
+    return render(request, 'consultas_pag/consulta_pag_form.html', {'form': form})
+
+# View para editar uma consulta de pagamento existente
+def consulta_pag_update(request, pk):
+    consulta = get_object_or_404(ConsultaPag, pk=pk)  # Busca a consulta para edição
+    if request.method == 'POST':
+        form = ConsultaPagForm(request.POST, instance=consulta)
+        if form.is_valid():
+            form.save()  # Salva as alterações
+            return redirect('consulta_pag_detail', pk=pk)  # Redireciona para os detalhes da consulta
+    else:
+        form = ConsultaPagForm(instance=consulta)  # Carrega o formulário com os dados existentes
+    return render(request, 'consultas_pag/consulta_pag_form.html', {'form': form})
+
+# View para deletar uma consulta de pagamento
+def consulta_pag_delete(request, pk):
+    consulta = get_object_or_404(ConsultaPag, pk=pk)  # Busca a consulta para deletar
+    if request.method == 'POST':
+        consulta.delete()  # Deleta a consulta
+        return redirect('consulta_pag_list')  # Redireciona para a lista de consultas
+    return render(request, 'consultas_pag/consulta_pag_confirm_delete.html', {'consulta': consulta})
