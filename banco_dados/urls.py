@@ -2,15 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("<int:id>/", views.details ,name='details'),
-    # ex: / polls/5/results/
-    #path("<int:inorte_id>/", views.results, name='results'),
-    # ex: /polls/5/vote/
-    #path ("<int:inoarte_id>/vote/", views.vote, name="vote"),
-    path("<int:id>/", views.usuários ,name='usuários'),
-    # ex: / polls/5/results/
-    #path("<int:inorte_id>/", views.results, name='results'),
-    # ex: /polls/5/vote/
-    #path ("<int:inoarte_id>/vote/", views.vote, name="vote"),
+    # URLs para Usuario
+    path('usuarios/', views.usuario_list, name='usuario_list'),
+    path('usuarios/<int:pk>/', views.usuario_detail, name='usuario_detail'),
+    path('usuarios/novo/', views.usuario_create, name='usuario_create'),
+    path('usuarios/<int:pk>/editar/', views.usuario_update, name='usuario_update'),
+    path('usuarios/<int:pk>/deletar/', views.usuario_delete, name='usuario_delete'),
+    # Repita para outras models...
 ]
