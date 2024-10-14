@@ -1,5 +1,5 @@
-from django.db import models
-from django.core.validators import MinLengthValidator, RegexValidator
+from django.db import models # type: ignore
+from django.core.validators import MinLengthValidator, RegexValidator # type: ignore
 
 class Usuario(models.Model):
     cpf = models.CharField(

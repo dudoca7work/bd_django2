@@ -1,5 +1,5 @@
 # seu_app/views.py
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect # type: ignore
 from .models import Usuario
 from .forms import UsuarioForm
 from .models import Inscricao
