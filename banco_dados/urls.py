@@ -58,11 +58,11 @@ urlpatterns = [
 
 urlpatterns = [
     # URLs para DadosBancarios
-    path('dados-bancarios/', views.dados_bancarios_list, name='dados_bancarios_list'),  # Listar dados bancários
-    path('dados-bancarios/<int:pk>/', views.dados_bancarios_detail, name='dados_bancarios_detail'),  # Detalhar dados bancários
-    path('dados-bancarios/novo/', views.dados_bancarios_create, name='dados_bancarios_create'),  # Criar novo dado bancário
-    path('dados-bancarios/<int:pk>/editar/', views.dados_bancarios_update, name='dados_bancarios_update'),  # Editar dado bancário existente
-    path('dados-bancarios/<int:pk>/deletar/', views.dados_bancarios_delete, name='dados_bancarios_delete'),  # Deletar dado bancário existente
+    path('dados-bancarios/', views.dado_bancario_list, name='dado_bancario_list'),  # Listar dados bancários
+    path('dados-bancarios/<int:pk>/', views.dado_bancario_detail, name='dado_bancario_detail'),  # Detalhar dados bancários
+    path('dados-bancarios/novo/', views.dado_bancario_create, name='dado_bancario_create'),  # Criar novo dado bancário
+    path('dados-bancarios/<int:pk>/editar/', views.dado_bancario_update, name='dado_bancario_update'),  # Editar dado bancário existente
+    path('dados-bancarios/<int:pk>/deletar/', views.dado_bancario_delete, name='dado_bancario_delete'),  # Deletar dado bancário existente
 ]
 
 urlpatterns = [
