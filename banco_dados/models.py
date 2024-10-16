@@ -26,7 +26,7 @@ class usuario(models.Model):
     tel2 = models.CharField(max_length=13, blank=True, null=True)
     email1 = models.EmailField(max_length=200, blank=False, null=False)
     email2 = models.EmailField(max_length=200, blank=True, null=True)
-     endereco = models.CharField(max_length=200, null=False)
+    endereco = models.CharField(max_length=200, null=False)
     n_endereco = models.IntegerField(null=False)
     bairro = models.CharField(max_length=200, null=False)
     municipio = models.CharField(max_length=200, null=False)
@@ -70,7 +70,7 @@ class edital(models.Model):
     prazo_bolsa = models.DurationField(null=False)
     status_vigencia = models.CharField(max_length=1, choices=STATUS_VIGENCIA_CHOICES, blank=False, null=False)
     tipo = models.CharField(max_length=200, null=False)
-    inscricao = models.ForeignKey(Inscricao, on_delete=models.CASCADE)
+    inscricao = models.ForeignKey(inscricao, on_delete=models.CASCADE)
 
 class bolsista_validado(models.Model):
     bolsistas_id = models.CharField(max_length=22, null=False)
@@ -84,8 +84,8 @@ class bolsista_validado(models.Model):
 class convocacao(models.Model):
     data_inicio = models.DateField(blank=False)
     data_fim = models.DateField(blank=False)
-    edital = models.ForeignKey(Edital, on_delete=models.CASCADE)
-    bolsista_validado = models.ForeignKey(BolsistaValidado, on_delete=models.CASCADE)
+    edital = models.ForeignKey(edital, on_delete=models.CASCADE)
+    bolsista_validado = models.ForeignKey(bolsistavalidado, on_delete=models.CASCADE)
 
 class posse(models.Model):
     decla_anuencia = models.URLField(blank=False)
@@ -104,7 +104,7 @@ class dado_bancario(models.Model):
     matricula = models.CharField(max_length=200)
     tipo_matricula = models.CharField(max_length=200)
     cpf_avaliador = models.CharField(max_length=11, validators=[MinLengthValidator(11)])
-    posse = models.ForeignKey(Posse, on_delete=models.CASCADE)
+    posse = models.ForeignKey(posse, on_delete=models.CASCADE)
 
 class bolsista_ativo(models.Model):
     status = models.CharField(max_length=200)
@@ -116,8 +116,8 @@ class frequencia(models.Model):
     ano = models.IntegerField(blank=False)  # Alterado para IntegerField
     carga_horaria = models.CharField(max_length=200)
     arquivo_freq = models.FileField(upload_to='frequencias/')
-    bolsista_validado = models.ForeignKey(BolsistaValidado, on_delete=models.CASCADE)
-    bolsista_ativo = models.ForeignKey(BolsistaAtivo, on_delete=models.CASCADE)
+    bolsista_validado = models.ForeignKey(bolsistavalidado, on_delete=models.CASCADE)
+    bolsista_ativo = models.ForeignKey(bolsistaativo, on_delete=models.CASCADE)
 
 class registro(models.Model):
     TURNO_CHOICES = (
@@ -143,8 +143,7 @@ class ConsultaPag(models.Model):
     
     status_pag = models.CharField(max_length=1, choices=STATUS_PAG_CHOICES, blank=False)
     mes = models.IntegerField(blank=False)  # Alterado para IntegerField
-    etapas = models.CharField(max_length=200)
+    etapa = models.CharField(max_length=200)
     processo = models.CharField(max_length=200)
-    bolsista_validado = models.ForeignKey(BolsistaValidado, on_delete=models.CASCADE)
-    bolsista_ativo = models.ForeignKey(BolsistaAtivo, on_delete=models.CASCADE)
-    frequencia = models.ForeignKey(Frequencia, on_delete=models.CASCADE)
+    bolsista_validado = models.ForeignKey(bolsistavalidado, on_delete=models.CASCADE)
+    bolsista_ativo = models.ForeignKey(bolsistaativo, on_delete=models.CASCADE)
