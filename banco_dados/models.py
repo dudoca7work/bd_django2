@@ -41,7 +41,6 @@ class inscricao(models.Model):
     encargo = models.CharField(max_length=200, null=False)
     acao = models.CharField(max_length=200, null=False)
     edital_id = models.CharField(max_length=20, null=False)
-    encargo = models.CharField(max_length=200, null=False)
     crit_a = models.CharField(max_length=200, null=False)
     crit_b = models.CharField(max_length=200, null=False)
     crit_c = models.CharField(max_length=200, null=False)
