@@ -134,7 +134,7 @@ class registro(models.Model):
     carga_horaria = models.CharField(max_length=8, choices=CARGA_HORARIA_CHOICES, blank=False, null=False)  # Alterado max_length
     frequencia = models.ForeignKey(frequencia, on_delete=models.CASCADE)
 
-class ConsultaPag(models.Model):
+class consultapag(models.Model):
     STATUS_PAG_CHOICES = (
         ('A', 'Ativo'),
         ('P', 'Pendente'),
